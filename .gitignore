@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# Power Apps Code App — local environment binding (contains tenant/app IDs)
+codeapp/power.config.json
+
+# Solution build artifacts
+solution-allinone/dist/
+
+# Local agent / editor tooling
+.claude/
+.playwright-mcp/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs & local env
+*.log
+*.local
+.env
+.env.*
+.DS_Store
