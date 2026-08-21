@@ -8,7 +8,7 @@
     <Descriptions>
       <Description description="End-to-end daily sync of Copilot Studio message credit consumption from the Power Platform licensing API into Dataverse." languagecode="1033" />
     </Descriptions>
-    <Version>1.0.0.0</Version>
+    <Version>1.0.1.0</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>CreditConsumptionSync</UniqueName>
@@ -82,6 +82,10 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="1" schemaName="cat_agentdetail" behavior="0" />
+      <RootComponent type="1" schemaName="cat_syncmetadata" behavior="0" />
+      <RootComponent type="1" schemaName="cat_tenantcapacity" behavior="0" />
+      <RootComponent type="20" id="{854eaabf-108c-f111-8077-70a8a590c51c}" behavior="0" />
       <RootComponent type="29" id="{3c9d1e20-2b3c-4d5e-9f6a-7b8c9d0e1f2a}" behavior="0" />
     </RootComponents>
     <MissingDependencies />

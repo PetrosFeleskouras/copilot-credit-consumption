@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{50634cef-9eac-4ecf-a31f-412bd612c4fb}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cat_agentdetail_name" select="1" icon="1" preview="1">
+        <row name="result" id="cat_agentdetailid">
+          <cell name="cat_agentdetail_name" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>1</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cat_agentdetail">
+          <attribute name="cat_agentdetailid" />
+          <attribute name="cat_agentdetail_name" />
+          <attribute name="createdon" />
+          <order attribute="cat_agentdetail_name" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Agent Detail Advanced Find View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>
