@@ -139,7 +139,7 @@ feature, tool, or knowledge source values.
 The detailed dimensions depend on the harness used to build the agent. Live observation
 shows the following behavior:
 
-- Agents built with the **Classic harness** can provide the rich feature, tool, LLM model,
+- Agents built with the **Standard harness** can provide the rich feature, tool, LLM model,
   and knowledge source dimensions described above.
 - Agents built with the **GitHub Copilot harness** report `metadata.FeatureName` as
   `Process Agent` for all consumption rows.

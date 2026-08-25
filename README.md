@@ -110,7 +110,7 @@ directly on them.
 | `cat_feature`, `cat_tool`, `cat_llmmodel`, `cat_channel`, `cat_knowledgesources`, `cat_product` | String | Usage breakdown dimensions. |
 | `cat_rowkey` | String | Composite key used to de‑duplicate a day's rows. |
 
-> **Harness metadata** — Classic harness agents can provide feature, tool, LLM model,
+> **Harness metadata** — Standard harness agents can provide feature, tool, LLM model,
 > and knowledge source dimensions. GitHub Copilot harness agents currently report the
 > feature as `Process Agent` and do not provide tool, LLM model, or knowledge source
 > values. Those blanks are an upstream telemetry limitation, not a sync failure.

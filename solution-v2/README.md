@@ -17,7 +17,7 @@ status.
   `Users`, `ResourceName`, and `NonBillableQuantity` mappings when supplied by the API.
 - GitHub Copilot harness agents currently report feature `Process Agent` and do not
   provide tool, LLM model, or knowledge source values. This source limitation does not
-  apply in the same way to Classic harness agents.
+  apply in the same way to Standard harness agents.
 - Requests source pages of 5,000 rows. Continuation paging and cross-page deduplication
   remain enabled for larger days.
 - Writes each source page to Dataverse as sequential 500-operation changesets, below the
