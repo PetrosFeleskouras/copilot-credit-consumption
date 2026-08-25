@@ -15,7 +15,6 @@ export function useAgentData(range: DateRange) {
 
   useEffect(() => {
     let cancelled = false
-    setState((s) => ({ ...s, loading: true, error: null }))
     Promise.all([loadAgentDetails(), loadMeta(), loadTenantCapacity()])
       .then(([all, meta, capacity]) => {
         if (!cancelled) setState({ all, meta, capacity, loading: false, error: null })

@@ -28,7 +28,7 @@ reshape those reports or build your own views on top of them. This solution give
 - **Sync** — a Power Automate flow runs at 03:00 UTC and writes one row per agent per day
   into `cat_agentdetail` (7‑day self‑healing overlap; 180‑day backfill on first run) plus
   a capacity snapshot into `cat_tenantcapacity`. It reads consumption from the Power
-  Platform licensing API and environment names from the BAP API.
+  Platform licensing and environment APIs.
 - **App** — a React + Fluent UI v9 Code App reads the Dataverse tables and renders
   insights, breakdowns, and a data grid.
 
@@ -55,8 +55,8 @@ Download the solution from the **[latest release](https://github.com/PetrosFeles
    **Solutions → Import solution** → upload the zip. *(CLI alternative:
    `pac solution import --path CopilotCreditConsumption_managed.zip --publish-changes`.)*
    This creates the tables, the `Credit Insights Reader` role, the flow (imported **off**),
-   the Code App, and four unbound connection references.
-3. **Bind the four connections** (see the table below).
+  the Code App, and three unbound connection references.
+3. **Bind the three connections** (see the table below).
 4. **Turn on the flow** — enable *Copilot Credit Consumption - Daily* and **Run** it once.
    **Wait for this first run to finish before opening the app** — the 180-day backfill can
    take 10-20 minutes, and the dashboard stays empty until it completes. (The trigger is a
@@ -64,19 +64,18 @@ Download the solution from the **[latest release](https://github.com/PetrosFeles
 5. **Open & share the app** — open *copilot-credit-insights* from **Apps**. To give others
    read access, **share the app** and assign the **Credit Insights Reader** role.
 
-**The four connections** — bind each in the solution's **Connection references** (or open
+**The three connections** — bind each in the solution's **Connection references** (or open
 the flow, which prompts for each):
 
 | Connection reference | Connector | Base Resource URL / Entra ID resource URI |
 |---|---|---|
 | `ccsync_dvref` | Microsoft Dataverse | *(just sign in — no URL)* |
-| `ccsync_webref` | HTTP with Microsoft Entra ID | `https://licensing.powerplatform.microsoft.com` |
 | `ccsync_bapref` | HTTP with Microsoft Entra ID | `https://api.powerplatform.com` |
 | `ccsync_dvhttpref` | HTTP with Microsoft Entra ID | your org URL, e.g. `https://YOUR-ORG.crm.dynamics.com` |
 
-For the three *HTTP with Microsoft Entra ID* connections, enter the URL in **both** the
+For the two *HTTP with Microsoft Entra ID* connections, enter the URL in **both** the
 *Base Resource URL* and *Microsoft Entra ID resource URI* fields. The account authorizing
-`ccsync_webref` must be a **tenant admin**. Find your org URL in
+`ccsync_bapref` must be a **tenant admin**. Find your org URL in
 [make.powerapps.com](https://make.powerapps.com) → **⚙ Settings → Session details →
 Instance url**.
 
@@ -111,6 +110,11 @@ directly on them.
 | `cat_feature`, `cat_tool`, `cat_llmmodel`, `cat_channel`, `cat_knowledgesources`, `cat_product` | String | Usage breakdown dimensions. |
 | `cat_rowkey` | String | Composite key used to de‑duplicate a day's rows. |
 
+> **Harness metadata** — Classic harness agents can provide feature, tool, LLM model,
+> and knowledge source dimensions. GitHub Copilot harness agents currently report the
+> feature as `Process Agent` and do not provide tool, LLM model, or knowledge source
+> values. Those blanks are an upstream telemetry limitation, not a sync failure.
+
 **`cat_tenantcapacity`** — a capacity snapshot written each run: `cat_capacitytype`,
 `cat_asofdate` / `cat_capturedon` (DateTime), and the decimals `cat_entitled`,
 `cat_allocated`, `cat_consumed`, `cat_available`, `cat_paygoconsumed`, plus
@@ -129,8 +133,9 @@ The deployable solution is on the **[Releases](https://github.com/PetrosFeleskou
 | Path | Purpose |
 |---|---|
 | `codeapp/` | Power Apps Code App source (React / Vite / Fluent UI v9). |
-| `solution-allinone/` | Source for the daily cloud flow. |
-| `docs/` | Security requirements. |
+| `solution-v2/` | Current V2 flow source, package builders, and validation. |
+| `solution-allinone/` | Legacy V1 flow source retained for upgrade and comparison. |
+| `docs/` | Security requirements and the V2 licensing API reference. |
 
 ## 🔐 Security
 
@@ -138,12 +143,17 @@ See [docs/security-requirements.md](docs/security-requirements.md) for the minim
 roles/licenses to install, run the sync (tenant admin + Dataverse write), and view the app
 (`Credit Insights Reader` role).
 
+See [docs/power-platform-licensing-api.md](docs/power-platform-licensing-api.md) for the
+V2 API contract, authentication, paging, field mappings, known gaps, and deployment
+validation checklist.
+
 ## ⚠️ Disclaimer
 
 This is a community sample, **not** a Microsoft product and not affiliated with or endorsed
-by Microsoft. It reads the Power Platform licensing / entitlements API, which is **not an
-officially documented or supported API** and may change without notice. Provided **as‑is**
-under the MIT license — review it against your organization's policies before deploying.
+by Microsoft. V2 uses documented Power Platform licensing entitlement routes, but its
+`includeFields` parameter and rich nested metadata contract are not fully described in the
+public REST reference and may change. Provided **as‑is** under the MIT license — review it
+against your organization's policies before deploying.
 
 ## 📄 License
 
