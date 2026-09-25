@@ -1,5 +1,7 @@
 # 💳 Copilot Credit Consumption
 
+> ⚠️ **Update (September 2026):** The Copilot Credit consumption endpoint used in this article is now restricted and returns HTTP 403 when called from flows, connectors or scripts, so the solution described below no longer works. A supported alternative is expected later this year, and this article will be updated as soon as it's available. In the meantime, use the Power Platform admin center to view and download consumption data.
+
 Track Microsoft Copilot Studio message‑credit consumption across your tenant — a daily
 Power Automate flow stores per‑agent usage in Dataverse, surfaced in a Power Apps
 **Code App** dashboard.
